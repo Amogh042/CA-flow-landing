@@ -1,12 +1,12 @@
-import { Calculator } from "lucide-react";
+import { Workflow } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Logo = ({ to = "/" }: { to?: string }) => (
-  <Link to={to} className="flex items-center gap-2 group">
-    <div className="h-9 w-9 rounded-xl bg-gradient-brand flex items-center justify-center shadow-[0_0_20px_hsl(262_83%_58%/0.4)]">
-      <Calculator className="h-5 w-5 text-white" />
+  <Link to={to} className="group flex items-center gap-2">
+    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-brand shadow-[0_0_24px_hsl(197_90%_58%/0.3)]">
+      <Workflow className="h-5 w-5 text-white" />
     </div>
-    <span className="text-xl font-bold tracking-tight gradient-text">CalcOS</span>
+    <span className="text-xl font-semibold tracking-tight gradient-text">CA-flow</span>
   </Link>
 );
 

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Logo from "@/components/Logo";
 import Orbs from "@/components/Orbs";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ShieldCheck } from "lucide-react";
 
 const GoogleIcon = () => (
   <svg viewBox="0 0 24 24" className="h-5 w-5">
@@ -12,29 +12,30 @@ const GoogleIcon = () => (
 );
 
 const Login = () => (
-  <div className="relative min-h-screen flex items-center justify-center px-4">
+  <div className="relative flex min-h-screen items-center justify-center px-4">
     <Orbs />
-    <Link to="/" className="absolute top-6 left-6 z-10 text-sm text-white/60 hover:text-white flex items-center gap-1">
+    <Link to="/" className="absolute left-6 top-6 z-10 flex items-center gap-1 text-sm text-white/60 transition hover:text-white">
       <ArrowLeft className="h-4 w-4" /> Back
     </Link>
 
-    <div className="relative z-10 glass p-10 w-full max-w-md animate-scale-in">
-      <div className="flex justify-center mb-8"><Logo /></div>
-      <h1 className="text-3xl font-bold text-center">Welcome back</h1>
-      <p className="mt-2 text-center text-white/60 text-sm">Sign in to access your calculators and history.</p>
+    <div className="relative z-10 w-full max-w-md animate-scale-in glass p-10">
+      <div className="mb-8 flex justify-center"><Logo /></div>
+      <h1 className="text-center text-3xl font-semibold">Welcome back</h1>
+      <p className="mt-2 text-center text-sm text-white/60">Sign in to access your CA-flow subscription and desktop workspace.</p>
 
-      <Button className="mt-8 w-full rounded-full bg-white text-black hover:bg-white/90 h-12 text-base font-medium flex items-center justify-center gap-3">
+      <Button className="mt-8 flex h-12 w-full items-center justify-center gap-3 rounded-full bg-white text-base font-medium text-slate-950 hover:bg-white/90">
         <GoogleIcon />
         Sign in with Google
       </Button>
 
-      <p className="mt-6 text-center text-xs text-white/50 leading-relaxed">
-        No account needed — Google login creates yours automatically.
-      </p>
+      <Button variant="ghost" className="mt-3 flex h-12 w-full items-center justify-center gap-3 rounded-full border border-white/10 hover:bg-white/5">
+        <ShieldCheck className="h-4 w-4 text-primary" />
+        Continue with Email
+      </Button>
 
-      <div className="mt-8 pt-6 border-t border-white/5 text-center">
-        <Link to="/dashboard" className="text-sm text-primary hover:underline">Skip to dashboard demo →</Link>
-      </div>
+      <p className="mt-6 text-center text-xs leading-relaxed text-white/50">
+        Your subscription and desktop access stay connected after login using the same account.
+      </p>
     </div>
   </div>
 );

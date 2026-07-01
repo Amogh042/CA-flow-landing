@@ -1,24 +1,38 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CalcOS — Every calculation a finance professional needs</title>
-    <meta name="description" content="100+ finance calculators for CAs worldwide — tax, loans, depreciation, valuation, payroll and more. One app." />
-    <meta name="author" content="CalcOS" />
+    <title>CA-flow — Compliance workspace for Indian CA firms</title>
+    <meta name="description" content="Track GST, ITR, TDS deadlines. Manage clients. 98 built-in calculators. Built exclusively for Indian Chartered Accountants." />
+    <meta name="author" content="CA-flow" />
+    <meta name="keywords" content="CA-flow, CA Practice Management Software, Chartered Accountant Software India, GST Due Date Tracker, ITR Filing Software, TDS Management Software, ROC Compliance Software, Client Management for CAs, Tax Software India, CA Productivity Software" />
 
-    <meta property="og:title" content="CalcOS — Finance calculators for professionals" />
-    <meta property="og:description" content="100+ tools. One app. Built for CAs worldwide." />
+    <meta property="og:title" content="CA-flow — Practice management software for Indian CAs" />
+    <meta property="og:description" content="Desktop-first practice management for Indian Chartered Accountants with client management, due-date tracking and secure cloud sync." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@Lovable" />
+    <meta name="twitter:site" content="@CAflow" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
   </head>
 
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <noscript>You need JavaScript enabled to run this app.</noscript>
+    <script type="module">
+      const loadApp = async () => {
+        try {
+          await import('/src/main.tsx');
+        } catch {
+          if (!window.location.pathname.includes('/dist/')) {
+            window.location.replace('/dist/index.html');
+          }
+        }
+      };
+
+      loadApp();
+    </script>
   </body>
 </html>
