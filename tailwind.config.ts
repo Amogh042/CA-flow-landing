@@ -14,6 +14,8 @@ export default {
     },
     extend: {
       colors: {
+        sand: "#f2ead9",
+        "sand-dark": "#e8dcc4",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -65,10 +67,10 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Space Grotesk', 'sans-serif'],
       },
       backgroundImage: {
-        'gradient-brand': 'var(--gradient-brand)',
-        'gradient-purple': 'var(--gradient-purple)',
+        'gradient-primary': 'var(--gradient-primary)',
       },
       keyframes: {
         "accordion-down": { from: { height: "0" }, to: { height: "var(--radix-accordion-content-height)" } },

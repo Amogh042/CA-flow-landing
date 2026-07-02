@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,85 +6,99 @@
 
 @layer base {
   :root {
-    --background: 225 37% 8%;
-    --foreground: 0 0% 100%;
+    /* raw design tokens */
+    --bg-base: #f2ead9;
+    --bg-surface: #ece2cc;
+    --bg-elevated: #e4d7ba;
+    --border-color: rgba(0, 0, 0, 0.08);
+    --text-primary: #1a1610;
+    --text-secondary: rgba(26, 22, 16, 0.65);
+    --text-tertiary: rgba(26, 22, 16, 0.40);
+    --color-primary: #f97316;
+    --color-primary-hover: #ea580c;
+    --color-primary-glow: rgba(249, 115, 22, 0.12);
+    --gradient-primary: linear-gradient(135deg, #f97316, #f59e0b);
+    --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.06);
+    --shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.08);
+    --shadow-button-hover: 0 4px 16px rgba(249, 115, 22, 0.15);
 
-    --card: 220 28% 12%;
-    --card-foreground: 0 0% 100%;
+    /* tailwind-compatible tokens */
+    --background: 41 49% 90%;
+    --foreground: 35 24% 8%;
 
-    --popover: 220 28% 10%;
-    --popover-foreground: 0 0% 100%;
+    --card: 41 45% 86%;
+    --card-foreground: 35 24% 8%;
 
-    --primary: 199 90% 58%;
+    --popover: 41 45% 86%;
+    --popover-foreground: 35 24% 8%;
+
+    --primary: 25 95% 53%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 274 84% 65%;
-    --secondary-foreground: 0 0% 5%;
+    --secondary: 41 44% 81%;
+    --secondary-foreground: 35 24% 8%;
 
-    --muted: 220 24% 14%;
-    --muted-foreground: 0 0% 65%;
+    --muted: 41 44% 81%;
+    --muted-foreground: 35 10% 37%;
 
-    --accent: 182 100% 68%;
-    --accent-foreground: 0 0% 5%;
+    --accent: 25 95% 53%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 72% 55%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 100%;
-    --input: 220 24% 16%;
-    --ring: 199 90% 58%;
+    --border: 35 24% 8%;
+    --input: 41 44% 81%;
+    --ring: 25 95% 53%;
 
-    --radius: 1rem;
+    --radius: 12px;
 
-    --sidebar-background: 225 37% 8%;
-    --sidebar-foreground: 0 0% 92%;
-    --sidebar-primary: 199 90% 58%;
+    --sidebar-background: 41 44% 81%;
+    --sidebar-foreground: 35 24% 8%;
+    --sidebar-primary: 25 95% 53%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 24% 14%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 220 24% 16%;
-    --sidebar-ring: 199 90% 58%;
-
-    --gradient-brand: linear-gradient(135deg, hsl(199 90% 58%), hsl(274 84% 65%), hsl(182 100% 68%));
-    --gradient-purple: linear-gradient(135deg, hsl(199 90% 58%), hsl(274 84% 65%));
-    --glow-purple: 0 0 30px hsl(274 84% 65% / 0.28);
-    --glow-teal: 0 0 30px hsl(182 100% 68% / 0.22);
-    --glow-card-hover: 0 0 30px hsl(199 90% 58% / 0.16);
-  }
-
-  .dark {
-    --background: 225 37% 8%;
-    --foreground: 0 0% 100%;
+    --sidebar-accent: 41 45% 86%;
+    --sidebar-accent-foreground: 35 24% 8%;
+    --sidebar-border: 35 24% 8%;
+    --sidebar-ring: 25 95% 53%;
   }
 }
 
 @layer base {
   * { @apply border-border/10; }
-  html, body, #root { @apply min-h-screen; }
+  html, body, #root {
+    @apply min-h-screen;
+    background-color: #f2ead9;
+    min-height: 100%;
+  }
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Inter', system-ui, sans-serif;
-    background-color: hsl(var(--background));
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+  }
+  h1, h2, h3, h4, h5, h6,
+  .font-heading {
+    font-family: 'Space Grotesk', sans-serif;
   }
 }
 
 @layer components {
-  .glass {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+  .card-surface {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
     border-radius: 16px;
-    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   }
-  .glass-hover:hover {
+  .card-surface-hover:hover {
     transform: translateY(-2px);
-    border-color: rgba(132, 201, 255, 0.28);
-    box-shadow: var(--glow-card-hover);
+    border-color: rgba(249, 115, 22, 0.25);
+    box-shadow: var(--shadow-card-hover);
   }
 
   .gradient-text {
-    background: var(--gradient-brand);
+    background: var(--gradient-primary);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -92,110 +106,14 @@
   }
 
   .btn-gradient {
-    background: var(--gradient-brand);
-    box-shadow: 0 10px 28px -10px hsl(199 90% 58% / 0.45);
+    background: var(--gradient-primary);
+    box-shadow: 0 2px 8px rgba(249, 115, 22, 0.22);
     transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
   }
   .btn-gradient:hover {
     transform: translateY(-1px);
-    filter: brightness(1.06);
-    box-shadow: 0 14px 34px -10px hsl(199 90% 58% / 0.55);
+    filter: brightness(1.05);
+    box-shadow: var(--shadow-button-hover);
   }
 
-  .orbs {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-  .orb {
-    position: absolute;
-    width: 60vmax;
-    height: 60vmax;
-    border-radius: 50%;
-    filter: blur(120px);
-    will-change: transform;
-  }
-  .orb-purple {
-    top: -20vmax;
-    left: -15vmax;
-    background: rgba(99, 102, 241, 0.22);
-    animation: drift-a 30s ease-in-out infinite;
-  }
-  .orb-teal {
-    bottom: -25vmax;
-    right: -20vmax;
-    background: rgba(34, 211, 238, 0.16);
-    animation: drift-b 30s ease-in-out infinite;
-  }
-
-  .grid-bg {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background-image:
-      linear-gradient(rgba(99, 102, 241, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(34, 211, 238, 0.05) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
-    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
-  }
-
-  .charts-bg {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-  }
-  .chart-float {
-    position: absolute;
-    opacity: 0.18;
-    filter: drop-shadow(0 0 12px hsl(199 90% 58% / 0.36));
-    animation: float-y 9s ease-in-out infinite;
-  }
-  .chart-float.c2 { opacity: 0.12; animation-duration: 11s; animation-delay: -3s; }
-  .chart-float.c3 { opacity: 0.14; animation-duration: 13s; animation-delay: -6s; }
-  .chart-float.c4 { opacity: 0.10; animation-duration: 10s; animation-delay: -1.5s; }
-  .chart-float.c5 { opacity: 0.13; animation-duration: 12s; animation-delay: -4.5s; }
-
-  .anim-line {
-    stroke-dasharray: 600;
-    stroke-dashoffset: 600;
-    animation: draw-line 6s ease-in-out infinite;
-  }
-  .anim-line.delay-b { animation-delay: -2s; }
-  .anim-line.delay-c { animation-delay: -4s; }
-
-  .anim-bar {
-    transform-origin: bottom;
-    animation: grow-bar 4s ease-in-out infinite;
-  }
 }
-
-@keyframes drift-a {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(6vmax, 4vmax) scale(1.05); }
-}
-@keyframes drift-b {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-6vmax, -4vmax) scale(1.08); }
-}
-@keyframes float-y {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(-14px) translateX(6px); }
-}
-@keyframes draw-line {
-  0% { stroke-dashoffset: 600; }
-  55% { stroke-dashoffset: 0; }
-  100% { stroke-dashoffset: 0; opacity: 0.6; }
-}
-@keyframes grow-bar {
-  0%, 100% { transform: scaleY(0.2); }
-  50% { transform: scaleY(1); }
-}
-.animate-float { animation: float-y 6s ease-in-out infinite; }
-.animate-float.delay-1 { animation-delay: 1.5s; }
-.animate-float.delay-2 { animation-delay: 3s; }

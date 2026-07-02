@@ -5,36 +5,31 @@ import Logo from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/contexts/AuthContext";
+import { GoogleIcon } from "./Login";
 
-export const GoogleIcon = () => (
-  <svg viewBox="0 0 24 24" className="h-5 w-5">
-    <path fill="#EA4335" d="M12 10.2v3.9h5.5c-.24 1.4-1.68 4.1-5.5 4.1-3.3 0-6-2.73-6-6.1s2.7-6.1 6-6.1c1.88 0 3.14.8 3.86 1.48l2.64-2.54C16.8 3.4 14.6 2.4 12 2.4 6.8 2.4 2.6 6.6 2.6 12S6.8 21.6 12 21.6c6.9 0 9.4-4.85 9.4-7.37 0-.5-.06-.88-.14-1.23H12z"/>
-  </svg>
-);
-
-const Login = () => {
+const Signup = () => {
   const navigate = useNavigate();
-  const { signIn, signInWithGoogle } = useAuth();
+  const { signUp, signInWithGoogle } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [notice, setNotice] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleLoginSuccess = () => {
-    const returnTo = sessionStorage.getItem("returnTo") || "/";
-    sessionStorage.removeItem("returnTo");
-    navigate(returnTo);
-  };
-
-  const handleEmailLogin = async (e: React.FormEvent) => {
+  const handleEmailSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    setNotice("");
     setLoading(true);
     try {
-      await signIn(email, password);
-      handleLoginSuccess();
+      await signUp(email, password);
+      // If email confirmation is enabled in Supabase there is no session yet
+      setNotice("Account created. If prompted, confirm your email, then sign in.");
+      const returnTo = sessionStorage.getItem("returnTo") || "/";
+      sessionStorage.removeItem("returnTo");
+      navigate(returnTo);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Sign in failed");
+      setError(err instanceof Error ? err.message : "Sign up failed");
     } finally {
       setLoading(false);
     }
@@ -57,7 +52,7 @@ const Login = () => {
 
       <div className="w-full max-w-[400px] rounded-2xl border border-[var(--border-color)] bg-[var(--bg-surface)] p-8" style={{ boxShadow: "var(--shadow-card)" }}>
         <div className="mb-6 flex justify-center"><Logo /></div>
-        <h1 className="font-display text-center text-2xl font-bold text-[var(--text-primary)]">Sign in</h1>
+        <h1 className="font-display text-center text-2xl font-bold text-[var(--text-primary)]">Create your account</h1>
 
         <Button
           type="button"
@@ -74,7 +69,7 @@ const Login = () => {
           <div className="h-px flex-1 bg-[var(--border-color)]" />
         </div>
 
-        <form onSubmit={handleEmailLogin} className="space-y-3">
+        <form onSubmit={handleEmailSignup} className="space-y-3">
           <Input
             type="email"
             required
@@ -86,25 +81,27 @@ const Login = () => {
           <Input
             type="password"
             required
-            placeholder="Password"
+            minLength={6}
+            placeholder="Password (min 6 characters)"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="h-12 rounded-xl border-[var(--border-color)] bg-[var(--bg-base)] px-4 text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)]"
           />
           <Button type="submit" disabled={loading} className="btn-gradient h-12 w-full rounded-xl border-0 text-white">
-            {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Sign in"}
+            {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Sign up"}
           </Button>
         </form>
 
         {error && <p className="mt-3 text-center text-sm text-red-600">{error}</p>}
+        {notice && <p className="mt-3 text-center text-sm text-emerald-600">{notice}</p>}
 
         <p className="mt-6 text-center text-sm text-[var(--text-secondary)]">
-          Don&apos;t have an account?{" "}
-          <Link to="/signup" className="font-medium text-[var(--color-primary)] hover:underline">Sign up</Link>
+          Already have an account?{" "}
+          <Link to="/login" className="font-medium text-[var(--color-primary)] hover:underline">Sign in</Link>
         </p>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Signup;
