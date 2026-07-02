@@ -1,10 +1,14 @@
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
-const url = import.meta.env.VITE_SUPABASE_URL as string | undefined;
-const key = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+const url = import.meta.env.VITE_SUPABASE_URL;
+const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-export const supabase: SupabaseClient | null = url && key ? createClient(url, key) : null;
+console.log("URL:", url);
+console.log("KEY EXISTS:", !!key);
 
-export function isSupabaseConfigured(): boolean {
+export const supabase: SupabaseClient | null =
+  url && key ? createClient(url, key) : null;
+
+export function isSupabaseConfigured() {
   return !!supabase;
 }
